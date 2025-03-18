@@ -7,7 +7,7 @@ T=270;      %Temperature [K]
 
 zn=zeros(100,1); 
 
-[zn,p] = findp(h,g,R,zn,T);
+[zn,p] = q4_findp(h,g,R,zn,T);
 
 figure
 plot(p,zn)

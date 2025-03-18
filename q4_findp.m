@@ -1,4 +1,4 @@
-function [zn, p] = findp(h,g,R,zn,T) 
+function [zn, p] = q4_findp(h,g,R,zn,T) 
 
 %UNTITLED3 Summary of this function goes here 
 
