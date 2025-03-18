@@ -1,17 +1,13 @@
-close all 
+close all;  clear;
 
-clear 
-
-h=0.5; 
-
-g=9.81; 
-
-R=287.04; 
-
-T=270; 
+h=0.1;      %step
+g=9.81;     %Gravity
+R=287.04;   %Specific Gas Constant [Jkg-1K-1]
+T=270;      %Temperature [K] 
 
 zn=zeros(100,1); 
 
 [zn,p] = findp(h,g,R,zn,T);
 
+figure
 plot(p,zn)

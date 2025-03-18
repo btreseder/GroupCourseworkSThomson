@@ -4,7 +4,7 @@ function [zn, p] = findp(h,g,R,zn,T)
 
 % Detailed explanation goes here 
 n = 1;
-while zn(n) <= 200000
+while zn(n) <= 20
     p(n) = exp( log(1e5) - g/R*(zn(n)));
     zn(n+1) = zn(n) + h*(.5*(1/T+1/T));
     n = n+1;
