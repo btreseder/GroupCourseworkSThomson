@@ -12,9 +12,11 @@ B = B(tau,S_0); T = (B./sigma).^(1/4);  fliplr(T);
 h=0.1;      %step
 Cp = 7*R/2; %Specific Heat Capacity
 
+
 % Find P Function
 p = q4_findp(p_z0,g,R,T);
 fliplr(p);
+
 
 % Plotting Figure
 figure
