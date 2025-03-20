@@ -1,13 +1,23 @@
-close all;  clear;
+close all; clear;
 
+load("workspace_consts.mat")
+
+% Test with T defined with B
+B = B(tau,S_0); T = (B./sigma).^(1/4);  fliplr(T);
+
+% Test with T the same for all heights (initial case)
+%T = zeros(size(z));     T(:) = 270;
+
+% Other Constants Defined
 h=0.1;      %step
-g=9.81;     %Gravity
-R=287.04;   %Specific Gas Constant [Jkg-1K-1]
-T=270;      %Temperature [K] 
+Cp = 7*R/2; %Specific Heat Capacity
 
-zn=zeros(100,1); 
 
-[zn,p] = q4_findp(h,g,R,zn,T);
+% Find P Function
+p = q4_findp(p_z0,g,R,T);
+fliplr(p);
 
+
+% Plotting Figure
 figure
-plot(p,zn)
+plot(p,z)

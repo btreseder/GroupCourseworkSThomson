@@ -1,14 +1,15 @@
-function [zn, p] = q4_findp(h,g,R,zn,T) 
+
+function p = q4_findp(p_0,g,R,T) 
 
 %UNTITLED3 Summary of this function goes here 
+p = zeros(1,length(T));
+p(1) = p_0;
+h=1;
+% Detailed explanation goes here
+for i = 1:length(T)-1
+    %h = abs(zn(i+1) - zn(i)); %should be constant h = 1
+    p(i+1) = exp( log(p(i)) - (g/R)*( (h/2)*((1/T(i)))+(1/T(i+1))) );
 
-% Detailed explanation goes here 
-n = 1;
-while zn(n) <= 20
-    p(n) = exp( log(1e5) - g/R*(zn(n)));
-    zn(n+1) = zn(n) + h*(.5*(1/T+1/T));
-    n = n+1;
 end 
-p(n) = exp( log(1e5) - g/R*(zn(n)));
 
 end 
