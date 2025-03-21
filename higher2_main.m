@@ -3,7 +3,7 @@ clear; close all;
 load("workspace_consts.mat")
 
 week_sec = 604800; % 1 week in seconds
-tn = 6*week_sec;
+tn = 1*week_sec;
 dt = 9600;
 
 
@@ -16,9 +16,13 @@ S = @(theta, S_0, delta) S_0*(1+0.25*delta *(1-3*(sin(theta))^2));
 % Initial condition for find_D
 D_0 = 0;
 
+
+kappa = 1;
+
 theta_min = - pi/2;
 theta_max = pi/2;
-theta = theta_min:pi/32:theta_max;
+dtheta = pi/8;
+theta = theta_min:dtheta:theta_max;
 
 T = zeros(tn/dt,length(z), length(theta));
 T(1,:) = 175;
@@ -41,7 +45,7 @@ for n= 1:(tn/dt)
         
         j = length(T(n,:,i))-1;
     
-        T(n+1,1:j,i) = T(n,1:j,i) + dt *(g/Cp)* dNdp;
+        T(n+1,1:j,i) = T(n,1:j,i) + dt * dTdt(g,Cp,dNdp,kappa,R, squeeze(T(n,1:j,i)),p,theta(i),a,dtheta);
             
     end
 end
@@ -54,7 +58,7 @@ hold on
 
 theta_deg = theta.* (180/pi);
 
-contourf(theta_deg, ...
+contourf(   theta_deg, ...
             z(1:20000), ...
             squeeze(T(length(t),1:20000, 1:length(theta))), ...
             "ShowText",true, ...
