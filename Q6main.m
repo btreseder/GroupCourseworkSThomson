@@ -18,7 +18,8 @@ D_0 = 0;
 
 theta_min = - pi/2;
 theta_max = pi/2;
-theta = theta_min:pi/32:theta_max;
+dtheta = pi/32;
+theta = theta_min:dtheta:theta_max;
 
 T = zeros(tn/dt,length(z), length(theta));
 T(1,:) = 175;
