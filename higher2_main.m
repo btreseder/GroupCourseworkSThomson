@@ -17,11 +17,11 @@ S = @(theta, S_0, delta) S_0*(1+0.25*delta *(1-3*(sin(theta))^2));
 D_0 = 0;
 
 
-kappa = 1;
+kappa = 0.1;
 
 theta_min = - pi/2;
 theta_max = pi/2;
-dtheta = pi/8;
+dtheta = pi/32;
 theta = theta_min:dtheta:theta_max;
 
 T = zeros(tn/dt,length(z), length(theta));
@@ -44,8 +44,8 @@ for n= 1:(tn/dt)
         dNdp = finddNdp( Unum, Dnum, p(n,:) );
         
         j = length(T(n,:,i))-1;
-    
-        T(n+1,1:j,i) = T(n,1:j,i) + dt * dTdt(g,Cp,dNdp,kappa,R, squeeze(T(n,1:j,i)),p,theta(i),a,dtheta);
+
+        T(n+1,1:j,i) = T(n,1:j,i) + dt * dTdt(g,Cp,dNdp,kappa,R, squeeze(T(n,1:j,i)),p(n,:),theta(i),a,dtheta);
             
     end
 end
@@ -60,7 +60,7 @@ theta_deg = theta.* (180/pi);
 
 contourf(   theta_deg, ...
             z(1:20000), ...
-            squeeze(T(length(t),1:20000, 1:length(theta))), ...
+            squeeze(T(length(t),1:20001, 1:length(theta))), ...
             "ShowText",true, ...
             "LabelFormat","%1.f K", ...
             "LabelSpacing",216, ...
