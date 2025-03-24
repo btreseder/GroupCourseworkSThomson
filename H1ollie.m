@@ -59,7 +59,7 @@ t = 1:dt:tn+1;
 %Plot for T
 i = 1:50:length(t);
     plot(T(i,1:20000),z(1:20000), T(length(t),1:1000:20000),z(1:1000:20000), '--')
-    title("Q5")
+    title("C02=360ppmv")
     xlabel('Temperarture')
     ylabel('Height')
 
@@ -67,7 +67,7 @@ i = 1:50:length(t);
 figure;
 y = 1:50:length(t);
     plot(T1(y,1:20000),z(1:20000), T1(length(t),1:1000:20000),z(1:1000:20000), '--')
-    title("H1")
+    title("C02=720ppmv")
     xlabel('Temperarture')
     ylabel('Height')
 
@@ -76,6 +76,6 @@ figure; hold on
 plot(T(length(t),1:20000),z(1:20000))
 plot(T1(length(t),1:20000),z(1:20000))
 title("Analytical")
-legend 'Q5' 'H1'
+legend 'C02=360ppmv' 'C02=720ppmv'
 xlabel('Temperarture')
 ylabel('Height')
