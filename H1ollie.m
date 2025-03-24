@@ -56,14 +56,14 @@ for m= 1:(tn/dt)
 end
 
 t = 1:dt:tn+1;
-%Plot for T
+%Plot for C02 = 360ppmv
 i = 1:50:length(t);
     plot(T1(i,1:20000),z(1:20000), T1(length(t),1:1000:20000),z(1:1000:20000), '--')
     title("C02=360ppmv")
     xlabel('Temperarture')
     ylabel('Height')
 
-    %PLot for T1
+    %PLot for C02 = 720ppmv
 figure;
 y = 1:50:length(t);
     plot(T2(y,1:20000),z(1:20000), T2(length(t),1:1000:20000),z(1:1000:20000), '--')
@@ -71,7 +71,7 @@ y = 1:50:length(t);
     xlabel('Temperarture')
     ylabel('Height')
 
-%Both final t values plotted as both graphs converge to a single ?line?
+%Both 360ppmv and 720ppmv plotted as both graphs converge to a single ?line?
 figure; hold on
 plot(T1(length(t),1:20000),z(1:20000))
 plot(T2(length(t),1:20000),z(1:20000))
