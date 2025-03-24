@@ -60,22 +60,22 @@ t = 1:dt:tn+1;
 i = 1:50:length(t);
     plot(T1(i,1:20000),z(1:20000), T1(length(t),1:1000:20000),z(1:1000:20000), '--')
     title("C02=360ppmv")
-    xlabel('Temperarture')
-    ylabel('Height')
+    xlabel('Temperature (K)')
+    ylabel('Height (z)')
 
     %PLot for C02 = 720ppmv
 figure;
 y = 1:50:length(t);
     plot(T2(y,1:20000),z(1:20000), T2(length(t),1:1000:20000),z(1:1000:20000), '--')
     title("C02=720ppmv")
-    xlabel('Temperarture')
-    ylabel('Height')
+    xlabel('Temperature (K)')
+    ylabel('Height (z)')
 
-%Both 360ppmv and 720ppmv plotted as both graphs converge to a single ?line?
+%Both 360ppmv and 720ppmv  plotted as both graphs converge to a single ?line?
 figure; hold on
 plot(T1(length(t),1:20000),z(1:20000))
 plot(T2(length(t),1:20000),z(1:20000))
 title("Analytical")
 legend 'C02=360ppmv' 'C02=ppmv'
-xlabel('Temperarture')
-ylabel('Height')
+xlabel('Temperature (K)')
+ylabel('Height (z)')
