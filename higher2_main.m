@@ -31,6 +31,7 @@ T = zeros(tn/dt,length(z), length(theta));
 T(1,:) = 175; % This is making all times z=0 or z(1) value to be 175.
 
 
+
 %Predefine pressure vector
 p = zeros(length(z));
 
@@ -47,12 +48,9 @@ for n= 1:(tn/dt)
         
         j = length(T(n,:,i));
 
-
-        % Forward Euler not necessarily stable for diffusion
-            % Try a higher order timestepping scheme
-            % i.e. RK2
-
-        T(n+1,1:j,i) = T(n,1:j,i) + dt * dTdt(g,Cp,dNdp,kappa,R, squeeze(T(n,1:j,i)),p(n,:),theta(i),a,dtheta);
+        T(n+1,1:j,i) = T(n,1:j,i) + dt * dTdt(g, Cp, dNdp, kappa, R, ...
+                                                squeeze(T(n,1:j,i)), ...
+                                                p(n,:), theta(i), a, dtheta);
             
     end
 end
@@ -73,22 +71,3 @@ contourf(   theta_deg(1:length(theta)), ...
 
 xlabel("Latitude (degrees)")
 ylabel("Altitude (metres)")
-
-
-
-
-%% Quick Notes:
-%   The outer two angles (index 1 and 33 of theta) are responsible for
-%   values greatly outside the expected range
-
-%   squeeze(T(length(t),1:length(z),1))
-%   squeeze(T(length(t),1:length(z),length(theta)))
-%   both produce issues
-%   Issues start to be seen at timestep n = 4:6
-
-testA = T(1:8,1:length(z),1);
-testB = T(1:8,1:length(z),length(theta));
-
-
-%   Instability also seen for the lower z values (0 to 20 metres)
-testC = squeeze(T(length(t), 1:20, 1:length(theta)));
