@@ -39,9 +39,11 @@ plot(Unum,z)
 legend('D','U')
 title('numerical solutions')
 
+Uerr = abs(U - Unum);
+Derr = abs(D - Dnum);
+
 figure;
 hold on
-plot(z,Uerr)
 plot(Uerr,z)
 plot(Derr,z)
 legend('Error in U','Error in D')
