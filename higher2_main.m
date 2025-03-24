@@ -5,13 +5,14 @@ load("workspace_consts.mat")
 week_sec = 604800; % 1 week in seconds
 tn = 1*week_sec;
 dt = 9600;
+t = 1:dt:tn+1;
 
+B1 = B(tau,S_0); %Defines our B
 
 Cp = 7*R/2; %Specific Heat Capacity
 
 % Initial condition for find_U
 S = @(theta, S_0, delta) S_0*(1+0.25*delta *(1-3*(sin(theta))^2));
-
 
 % Initial condition for find_D
 D_0 = 0;
@@ -19,18 +20,19 @@ D_0 = 0;
 
 kappa = 0.1;
 
-theta_min = - pi/2;
-theta_max = pi/2;
-dtheta = pi/32;
+% Defines the range of latitudes chosen
+dtheta = pi/32; 
+theta_min = dtheta - pi/2;
+theta_max = pi/2 - dtheta;
 theta = theta_min:dtheta:theta_max;
 
+%Defines the Temperature Array to be filled
 T = zeros(tn/dt,length(z), length(theta));
-T(1,:) = 175;
-B1 = B(tau,S_0);
+T(1,:) = 175; % This is making all times z=0 or z(1) value to be 175.
 
+
+%Predefine pressure vector
 p = zeros(length(z));
-%p(1,:) = p_z0;
-
 
 for n= 1:(tn/dt)
     for i = 1:length(theta)
@@ -43,14 +45,17 @@ for n= 1:(tn/dt)
     
         dNdp = finddNdp( Unum, Dnum, p(n,:) );
         
-        j = length(T(n,:,i))-1;
+        j = length(T(n,:,i));
+
+
+        % Forward Euler not necessarily stable for diffusion
+            % Try a higher order timestepping scheme
+            % i.e. RK2
 
         T(n+1,1:j,i) = T(n,1:j,i) + dt * dTdt(g,Cp,dNdp,kappa,R, squeeze(T(n,1:j,i)),p(n,:),theta(i),a,dtheta);
             
     end
 end
-%%
-t = 1:dt:tn+1;
 
 %%
 close all;  figure;
@@ -58,9 +63,9 @@ hold on
 
 theta_deg = theta.* (180/pi);
 
-contourf(   theta_deg, ...
-            z(1:20000), ...
-            squeeze(T(length(t),1:20001, 1:length(theta))), ...
+contourf(   theta_deg(1:length(theta)), ...
+            z(1:length(z)), ...
+            squeeze(T(length(t),1:length(z), 1:length(theta))), ...
             "ShowText",true, ...
             "LabelFormat","%1.f K", ...
             "LabelSpacing",216, ...
@@ -68,3 +73,22 @@ contourf(   theta_deg, ...
 
 xlabel("Latitude (degrees)")
 ylabel("Altitude (metres)")
+
+
+
+
+%% Quick Notes:
+%   The outer two angles (index 1 and 33 of theta) are responsible for
+%   values greatly outside the expected range
+
+%   squeeze(T(length(t),1:length(z),1))
+%   squeeze(T(length(t),1:length(z),length(theta)))
+%   both produce issues
+%   Issues start to be seen at timestep n = 4:6
+
+testA = T(1:8,1:length(z),1);
+testB = T(1:8,1:length(z),length(theta));
+
+
+%   Instability also seen for the lower z values (0 to 20 metres)
+testC = squeeze(T(length(t), 1:20, 1:length(theta)));
