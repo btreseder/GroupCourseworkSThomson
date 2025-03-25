@@ -37,7 +37,7 @@ for n= 1:(tn/dt)
 end
 
 T2 = zeros(tn/dt,length(z));
-T2(1,:) = T1(tn/dt,length(z)-1); %Starting Value as the End starting value of T
+T2(1,:) = T1(tn/dt,length(z)-1); % Starting Value as the End starting value of T
 p_z01 = p_z0;
 
 for m= 1:(tn/dt)
