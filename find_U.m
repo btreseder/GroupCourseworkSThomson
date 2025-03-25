@@ -10,9 +10,10 @@ function U = find_U(B,tau,U_0)
     tau=fliplr(tau);
     
     for i = 1:length(B)-1
-        h = abs(tau(i)-tau(i+1)); % % Tau does not change linearly like z
+        % Absolute Value of h as tau does not change linearly with z
+        h = abs(tau(i)-tau(i+1)); 
         B1 =  (h/2)*(-exp(-tau(i))*B(i) - exp(-tau(i+1))*B(i+1));
         U(i+1) = exp(tau(i+1))*(exp(-tau(i))*U(i) + B1);
     end
-    U = fliplr(U); %undo the flip
+    U = fliplr(U); % Undoing the flips
 end

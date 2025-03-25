@@ -9,10 +9,11 @@ function D_n = find_D(B,tau,D_0)
     tau = fliplr(tau);  
     B = fliplr(B);   
     
-    for i = 1:length(B) -1  
-        h = abs(tau(i)-tau(i+1)); % Tau does not change linearly like z
+    for i = 1:length(B) -1
+        % Absolute Value of h as tau does not change linearly with z  
+        h = abs(tau(i)-tau(i+1)); 
         B1 = (h/2)*( B(i)*exp(tau(i)) + B(i+1)*exp(tau(i+1)));
         D_n(i+1) = (D_n(i)*(exp(tau(i))) + B1)*(exp(-(tau(i+1))));    
     end
-    D_n = fliplr(D_n); %reverse the output to account for the rest of it
+    D_n = fliplr(D_n); % Undoing the flips
 end
