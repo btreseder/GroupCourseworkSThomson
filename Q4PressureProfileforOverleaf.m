@@ -12,6 +12,6 @@ fliplr(T);  % Flips Temperature Array
 % Plotting
 figure
 plot(p,z)
-title('Pressure Profile')
+%title('Pressure Profile')
 xlabel('Pressure (Pa)')
 ylabel('Distance (m)')
