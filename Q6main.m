@@ -3,7 +3,7 @@ clear; close all;
 load("workspace_consts.mat")
 
 week_sec = 604800; % 1 week in seconds
-tn = 6*week_sec;
+tn = 10*week_sec;
 dt = 9600;
 
 
