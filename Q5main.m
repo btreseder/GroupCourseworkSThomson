@@ -3,19 +3,17 @@
 load("workspace_consts.mat")
 
 tn = 604800*10; % 10 week in seconds
-dt = 9600;
+dt = 9600;      % Delta t in seconds
 
-U_0 = S_0;  D_0 = 0;
-Cp = 7*R/2; %Specific Heat Capacity
+T = zeros(tn/dt,length(z)); % Zeros Array for Temperature
+p = zeros(length(z));       % Zeros Array for Pressure
 
+% Initial Conditions
+U_0 = S_0;  D_0 = 0; % Upward and Downward Flux ICs
+Cp = 7*R/2;          % Specific Heat Capacity
+T(1,:) = 175;        % Initial Temperature
 
-
-T = zeros(tn/dt,length(z));
-T(1,:) = 175;
-B1 = B(tau,S_0);
-
-p = zeros(length(z));
-%p(1,:) = p_z0;
+B1 = B(tau,S_0); % Plank Function Analytical solution
 
 
 %figure; hold on;

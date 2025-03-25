@@ -1,14 +1,6 @@
 clear; clc; close all;
 
-load("workspace_consts.mat")
-
-% Initial Conditions
-H_a = 2000;                 % Height Scale
-tau_0 = 2.2;                % Optical Depth IC
-z = 0:1:20000;              % Distance in m
-tau = tau_0*exp(-z./H_a);   % Optical depth for every value of z
-S_0 = 238;                  % Solar Constant
-sigma = 5.67*10^(-8);       % Stefan-Boltzmann constant
+load("workspace_consts.mat") 
 
 % Analytical Solutions
 B = B(tau,S_0);         % Plank Function
@@ -31,7 +23,7 @@ title('Analytical solution at equilibrium')
 figure;
 plot(T,z)
 title('Temperature profile')
-xlabel('Temparature (K)')
+xlabel('Temparature (K°)')
 ylabel('Height (m)')
 
 % Plotting Numerical
@@ -42,7 +34,7 @@ hold on
 plot(Dnum,z)
 plot(Unum,z)
 legend('D','U')
-title('numerical solutions')
+title('Numerical solutions')
 xlabel('Temperature (K°)')
 ylabel('Height (m)')
 

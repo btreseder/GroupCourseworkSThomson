@@ -1,19 +1,14 @@
-%initial values
-clear
-H_a = 2000;
-tau_0 = 2.2;
-z = 0:1:20000;
-tau = tau_0*exp(-z./H_a);
-S_0 = 238;
-sigma = 5.67*10^(-8);
+close all; clear; clc;
+
+load('workspace_consts.mat')
 
 %Analytical Solutions
-B = B(tau,S_0);
-D = D(tau,S_0);
-U = U(tau,S_0);
-T = (B./sigma).^(1/4);
+B = B(tau,S_0);          % Analytical Solution for Plank Functions
+D = D(tau,S_0);          % Analytical Solution for Downward Flux
+U = U(tau,S_0);          % Analytical Solution for Upward Flux
+T = (B./sigma).^(1/4);   % Analytical Solution for Temperature
 
-%plot :)
+% Plotting Flux`s and Plank Function
 figure;
 hold on
 plot(B,z)
@@ -22,14 +17,14 @@ plot(U,z)
 legend('B','D','U')
 ylabel('Z (m)')
 xlabel('(Wm^-2)')
-title('Analytial solution at equilibrium')
+
+% Plotting Temperature
 figure;
 plot(T,z)
-title('Temperature profile')
-xlabel('Temparature (K)')
+xlabel('Temparature (K°)')
 ylabel('Z (m)')
 
-%plot numerical
+% Plotting numerical
 Unum = find_U(B,tau,S_0);
 Dnum = find_D(B,tau,0);
 figure;
@@ -37,16 +32,14 @@ hold on
 plot(Dnum,z)
 plot(Unum,z)
 legend('D','U')
-title('numerical solutions')
 
+% Plotting Flux Error
 Uerr = abs(U - Unum);
 Derr = abs(D - Dnum);
-
 figure;
 hold on
 plot(Uerr,z)
 plot(Derr,z)
 legend('Error in U','Error in D')
-title('Error in Numerical Solutions')
 xlabel('Error')
 ylabel('Height z (m)')
