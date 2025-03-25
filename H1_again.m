@@ -77,12 +77,13 @@ y = 1:length(t);
 figure; hold on
 plot(T1(length(t),1:20000),z(1:20000))
 plot(T2(length(t),1:20000),z(1:20000))
-title("Analytical")
-legend 'C02=360ppmv' 'C02=ppmv'
+legend 'C02=360ppmv' 'C02=720ppmv'
 xlabel('Temperature (K)')
 ylabel('Height (m)')
 
 figure; hold on
 axis([0 6e6 286 292])
 plot(t,T2(:,1) )
+xlabel('Time (s)')
+ylabel('Temperature (K)')
 
