@@ -1,4 +1,4 @@
- clear; clc; close all;
+clear; clc; close all;
 
 load("workspace_consts.mat")
 
@@ -36,8 +36,9 @@ for n= 1:(tn/dt)
    
 end
 
+B = B(tau,S_0);
 T2 = zeros(tn/dt,length(z));
-T2(1,:) = T1(tn/dt,length(z)-1); % Starting Value as the End starting value of T
+T2 =  (B./sigma).^(1/4);      %Starting Value as the analytical sol for original tau
 p_z01 = p_z0;
 
 for m= 1:(tn/dt)
@@ -49,8 +50,8 @@ for m= 1:(tn/dt)
     Dnum2 = find_D(B2,tau2,D_0);
 
     dNdp2 = finddNdp( Unum2, Dnum2, p2(m,:));
-    
-    k = length(T2(m,:))-1;
+
+     k = length(T2(m,:))-1;
 
     T2(m+1,1:k) = T2(m,1:k) + dt *(g/Cp)* dNdp2;
 end
@@ -65,11 +66,12 @@ i = 1:50:length(t);
 
     %PLot for C02 = 720ppmv
 figure;
-y = 1:50:length(t);
+y = 1:length(t);
     plot(T2(y,1:20000),z(1:20000), T2(length(t),1:1000:20000),z(1:1000:20000), '--')
     title("C02=720ppmv")
     xlabel('Temperature (K)')
     ylabel('Height (m)')
+    
 
 %Both 360ppmv and 720ppmv  plotted as both graphs converge to a single ?line?
 figure; hold on
@@ -79,3 +81,6 @@ title("Analytical")
 legend 'C02=360ppmv' 'C02=ppmv'
 xlabel('Temperature (K)')
 ylabel('Height (m)')
+
+figure; hold on
+plot(T2(:,1), t)
