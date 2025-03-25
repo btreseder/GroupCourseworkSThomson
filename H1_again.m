@@ -2,8 +2,8 @@ clear; clc; close all;
 
 load("workspace_consts.mat")
 
-tn = 60000000; % 10 week in seconds
-dt = 100000;
+tn = 6000000; % 10 week in seconds
+dt = 10000;
 
 U_0 = S_0;  D_0 = 0;
 Cp = 7*R/2; %Specific Heat Capacity
@@ -83,4 +83,6 @@ xlabel('Temperature (K)')
 ylabel('Height (m)')
 
 figure; hold on
-plot(T2(:,1), t)
+axis([0 6e6 286 292])
+plot(t,T2(:,1) )
+
