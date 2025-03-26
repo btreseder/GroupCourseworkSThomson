@@ -19,9 +19,9 @@ for n = 1:(tn/dt)                          % Horizontal Position in Array
     j = length(T(n,:)) -1;                 % Vertical Position in T array
     p(n,:) = q4_findp(p_z0, g, R, T(n,:)); % Pressure Array position
     
-    B = sigma .*T(n,:).^4;    % Plank Function Numerical solution
+    B = sigma .*T(n,:).^4;     % Plank Function Numerical solution
     Unum = find_U1(B,tau,U_0); % Upward Flux Numerical solution
-    Dnum = find_D(B,tau,D_0); % Downward Flux Numerical solution
+    Dnum = find_D(B,tau,D_0);  % Downward Flux Numerical solution
     
     % Net Flux differential
     dNdp = finddNdp(Unum, Dnum, p(n,:));
@@ -37,6 +37,5 @@ figure;
 hold on
 i = 1:50:length(t);
 plot(T(i,1:20000), z(1:20000))
-title('CO2 360ppmv')
 xlabel('Temperature (K°)')
 ylabel('Height (m)')

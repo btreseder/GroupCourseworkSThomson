@@ -3,8 +3,8 @@ clear; close all;
 load("workspace_consts.mat")
 
 week_sec = 604800; % 1 week in seconds
-tn = 6*week_sec;    
-dt = 9600;        % Time-step (240 minutes)
+tn = 6*week_sec;   % 6 weeks in seconds  
+dt = 9600;         % Time-step (240 minutes)
 
 
 Cp = 7*R/2; %Specific Heat Capacity
