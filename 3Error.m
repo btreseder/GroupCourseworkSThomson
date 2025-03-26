@@ -46,7 +46,7 @@ title('numerical solutions')
 xlabel('Temperature (K°)')
 ylabel('Height (m)')
 
-%%
+
 % Plotting Error
 figure;
 hold on
