@@ -4,18 +4,27 @@ load("workspace_consts.mat")
 
 
 tn = 604800*10; % 10 week in seconds
-dt = 9600; %Timestep
+dt = 9600;      % Delta t in seconds
 
-U_0 = S_0;  D_0 = 0;
-Cp = 7*R/2; %Specific Heat Capacity
+U_0 = S_0;  D_0 = 0; % Initial Values for Upward and Downward Flux
+Cp = 7*R/2; % Specific Heat Capacity
 
-tau2 = ((tau_0 + 0.2023 * log(720/360)) * exp(-z./H_a)); %Tau with CO2 doubled
+%Tau with CO2 doubled
+tau2 = ((tau_0 + 0.2023 * log(720/360)) * exp(-z./H_a));
 
-T1 = zeros(tn/dt,length(z));
-T1(1,:) = 175;
+% Plank function defined for tau at both 360ppmv and 720ppmv
 B1 = B(tau,S_0);
 B2 = B(tau2,S_0);
 
+% Zeros Array and Initial value for Temperature at 360ppmv
+T1 = zeros(tn/dt,length(z));
+T1(1,:) = 175;
+
+% Zeros Array and Initial value for Temperature at 360ppmv
+T2 = zeros(tn/dt,length(z));
+T2 = (B1./sigma).^(1/4); 
+
+% Zeros array for pressure for both 360ppmv and 720ppmv 
 p1 = zeros(length(z));
 p2 = zeros(length(z));
 
@@ -36,12 +45,8 @@ for n= 1:(tn/dt)
    
 end
 
-B = B(tau,S_0);
-T2 =  (B./sigma).^(1/4);    %Starting Value as the analytical sol for original tau
-p_z01 = p_z0;
-
 for m = 1:(tn/dt)
-    p2(m,:) = find_p( p_z01 , g , R , T2(m,:) );
+    p2(m,:) = find_p(p_z0 , g , R , T2(m,:));
     
     B2 = sigma.*T2(m,:).^4;
 
@@ -57,14 +62,14 @@ end
 
 t = 1:dt:tn+1;
 
-%Plot for C02 = 360ppmv
+% Plot for C02 = 360ppmv
 i = 1:50:length(t);
     plot(T1(i,1:20000),z(1:20000), T1(length(t),1:1000:20000),z(1:1000:20000), '--')
     title("C02=360ppmv")
     xlabel('Temperature (K)')
     ylabel('Height (m)')
 
-%PLot for C02 = 720ppmv
+% Plot for C02 = 720ppmv
 figure;
 y = 1:length(t);
     plot(T2(y,1:20000),z(1:20000), T2(length(t),1:1000:20000),z(1:1000:20000), '--')
@@ -73,7 +78,7 @@ y = 1:length(t);
     ylabel('Height (m)')
     
 
-%Both 360ppmv and 720ppmv plotted as both graphs converge to a single line
+% Both 360ppmv and 720ppmv plotted as both graphs converge to a single line
 figure; hold on
 plot(T1(length(t),1:20000),z(1:20000))
 plot(T2(length(t),1:20000),z(1:20000))
