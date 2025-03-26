@@ -2,8 +2,8 @@ clear; close all; clc;
 
 load("workspace_consts.mat")
 
-tn = 6000000; % 10 weeks in seconds
-dt = 10000;   % Delta t in seconds
+tn = 604800*10; % 10 weeks in seconds
+dt = 9600;      % Delta t in seconds
 
 T = zeros(tn/dt,length(z)); % Zeros Array for Temperature
 p = zeros(length(z));       % Zeros Array for Pressure
@@ -30,7 +30,7 @@ for n = 1:(tn/dt)                          % Horizontal Position in Array
 end
 
 % Delta t for plotting
-t = 1:dt:tn +1;
+t = 1:dt:tn + 1;
 
 % Plotting
 figure;

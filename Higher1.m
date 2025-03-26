@@ -37,7 +37,7 @@ for n= 1:(tn/dt)
 end
 
 B = B(tau,S_0);
-T2 =  (B./sigma).^(1/4);      %Starting Value as the analytical sol for original tau
+T2 =  (B./sigma).^(1/4);    %Starting Value as the analytical sol for original tau
 p_z01 = p_z0;
 
 for m = 1:(tn/dt)

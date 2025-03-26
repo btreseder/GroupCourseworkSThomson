@@ -17,7 +17,6 @@ S = @(theta, S_0, delta) S_0*(1+0.25*delta *(1-3*(sin(theta))^2));
 % Initial condition for find_D
 D_0 = 0;
 
-
 kappa = 0.1;
 
 % Defines the range of latitudes chosen
@@ -26,13 +25,13 @@ theta_min = dtheta - pi/2;
 theta_max = pi/2 - dtheta;
 theta = theta_min:dtheta:theta_max;
 
-%Defines the Temperature Array to be filled
+% Defines the Temperature Array to be filled
 T = zeros(tn/dt,length(z), length(theta));
 T(1,:) = 175; % This is making all times z=0 or z(1) value to be 175.
 
 
 
-%Predefine pressure vector
+% Predefine pressure vector
 p = zeros(length(z));
 
 for n= 1:(tn/dt)
