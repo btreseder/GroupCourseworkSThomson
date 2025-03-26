@@ -22,7 +22,7 @@ p2 = zeros(length(z));
 
 
 for n= 1:(tn/dt)
-    p1(n,:) = q4_findp( p_z0 , g , R , T1(n,:) );
+    p1(n,:) = find_p( p_z0 , g , R , T1(n,:) );
     
     B1 = sigma.*T1(n,:).^4;
 
@@ -42,7 +42,7 @@ T2 =  (B./sigma).^(1/4);      %Starting Value as the analytical sol for original
 p_z01 = p_z0;
 
 for m = 1:(tn/dt)
-    p2(m,:) = q4_findp( p_z01 , g , R , T2(m,:) );
+    p2(m,:) = find_p( p_z01 , g , R , T2(m,:) );
     
     B2 = sigma.*T2(m,:).^4;
 

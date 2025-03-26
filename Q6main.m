@@ -31,7 +31,7 @@ p = zeros(length(z));
 
 for i = 1:length(theta)
     for n= 1:(tn/dt)
-        p(n,:) = q4_findp( p_z0 , g , R , T(n,:,i) );
+        p(n,:) = find_p( p_z0 , g , R , T(n,:,i) );
         
         B1 = sigma.*T(n,:,i).^4;
         
