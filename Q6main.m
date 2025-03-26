@@ -50,7 +50,7 @@ end
 
 close all;  figure;
 
-% Delta t for plotting
+% Delta t to use when plotting
 t = 1:dt:tn+1;
 
 % Plotting with a contour
