@@ -48,11 +48,13 @@ for i = 1:length(theta)
     end
 end
 
+close all;  figure;
 
+% Delta t for plotting
 t = 1:dt:tn+1;
 
-
-close all;  figure;
+% Plotting with a contour
+figure;
 hold on
 
 theta_deg = theta.* (180/pi);
