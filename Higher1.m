@@ -4,7 +4,7 @@ load("workspace_consts.mat")
 
 
 tn = 604800*10; % 10 week in seconds
-dt = 9600;
+dt = 9600; %Timestep
 
 U_0 = S_0;  D_0 = 0;
 Cp = 7*R/2; %Specific Heat Capacity
@@ -18,7 +18,6 @@ B2 = B(tau2,S_0);
 
 p1 = zeros(length(z));
 p2 = zeros(length(z));
-%p(1,:) = p_z0;
 
 
 for n= 1:(tn/dt)
