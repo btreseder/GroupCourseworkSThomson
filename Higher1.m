@@ -44,8 +44,7 @@ for n= 1:(tn/dt)           % Horizontal Position in Array
     % Net Flux differential
     dNdp1 = finddNdp( Unum1, Dnum1, p1(n,:) );
 
-    T1(n+1,1:j) = T1(n,1:j) + dt *(g/Cp)* dNdp1;
-   
+    T1(n+1,1:j) = T1(n,1:j) + dt *(g/Cp)* dNdp1;  
 end
 
 % Forward Euler for 720ppmv
