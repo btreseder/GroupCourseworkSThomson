@@ -1,3 +1,4 @@
+%
 function dTdt = dTdt(g,C_p,dNdp,kappa,R,T,p,theta_n,a,dtheta)
     dTdt = zeros(1,length(T));
     for i = 2:length(T)-1
