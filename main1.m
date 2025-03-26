@@ -1,19 +1,14 @@
-%initial values
-clear
-H_a = 2000;
-tau_0 = 2.2;
-z = 0:1:20000;
-tau = tau_0*exp(-z./H_a);
-S_0 = 238;
-sigma = 5.67*10^(-8);
+clc; close all; clc;
+
+load("workspace_consts.mat")
 
 %Analytical Solutions
-B = B(tau,S_0);
-D = D(tau,S_0);
-U = U(tau,S_0);
-T = (B./sigma).^(1/4);
+B = B(tau,S_0);        % Plank Function
+D = D(tau,S_0);        % Downward Flux    
+U = U(tau,S_0);        % Upward Flux
+T = (B./sigma).^(1/4); % Temperature 
 
-%plot :)
+% Plotting Analytical
 figure;
 hold on
 plot(B,z)
@@ -22,14 +17,15 @@ plot(U,z)
 legend('B','D','U')
 ylabel('Z (m)')
 xlabel('(Wm^-2)')
-title('Analytial solution at equilibrium')
+
+% Plotting Temperature
 figure;
 plot(T,z)
 title('Temperature profile')
 xlabel('Temparature (K)')
 ylabel('Z (m)')
 
-%plot numerical
+% Plotting Numerical
 Unum = find_U(B,tau,S_0);
 Dnum = find_D(B,tau,0);
 figure;
@@ -39,6 +35,7 @@ plot(Unum,z)
 legend('D','U')
 title('numerical solutions')
 
+% Plotting Error 
 Uerr = abs(U - Unum);
 Derr = abs(D - Dnum);
 
