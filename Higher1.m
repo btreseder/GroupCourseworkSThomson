@@ -77,7 +77,7 @@ i = 1:50:length(t);
 
 % Plot for C02 = 720ppmv
 figure;
-y = 1:length(t);
+y = 1:50:length(t);
     plot(T2(y,1:20000),z(1:20000), ...
          T2(length(t),1:1000:20000),z(1:1000:20000), '--')
     xlabel('Temperature (K)')

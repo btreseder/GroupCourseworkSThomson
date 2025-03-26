@@ -51,7 +51,7 @@ for m= 1:(tn/dt)
 
     dNdp2 = finddNdp( Unum2, Dnum2, p2(m,:));
 
-     k = length(T2(m,:))-1;
+    k = length(T2(m,:))-1;
 
     T2(m+1,1:k) = T2(m,1:k) + dt *(g/Cp)* dNdp2;
 end
