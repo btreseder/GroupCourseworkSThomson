@@ -84,7 +84,6 @@ y = 1:length(t);
     xlabel('Temperature (K)')
     ylabel('Height (m)')
     
-
 % Both 360ppmv and 720ppmv plotted as both graphs converge to a single line
 figure; hold on
 plot(T1(length(t),1:20000),z(1:20000))
