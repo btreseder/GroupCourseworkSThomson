@@ -34,6 +34,7 @@ t = 1:dt:tn + 1;
 
 % Plotting
 figure;
+colororder('sail')
 hold on
 i = 1:50:length(t);
 plot(T(i,1:20000), z(1:20000))

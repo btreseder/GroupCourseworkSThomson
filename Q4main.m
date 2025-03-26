@@ -19,5 +19,6 @@ fliplr(p);
 
 
 % Plotting Figure
-figure
+figure;
+colororder('sail')
 plot(p,z)

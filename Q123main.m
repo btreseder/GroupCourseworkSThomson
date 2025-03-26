@@ -11,6 +11,7 @@ T = (B./sigma).^(1/4); % Temperature
 
 % Plotting Analytical
 figure;
+colororder('sail')
 hold on
 plot(B,z)
 plot(D,z)
@@ -21,6 +22,7 @@ xlabel('(Wm^-2)')
 
 % Plotting Temperature
 figure;
+colororder('sail')
 plot(T,z)
 title('Temperature profile')
 xlabel('Temparature (K)')
@@ -31,6 +33,7 @@ ylabel('Z (m)')
 Unum = find_U(B,tau,S_0);
 Dnum = find_D(B,tau,0);
 figure;
+colororder('sail')
 hold on
 plot(Dnum,z)
 plot(Unum,z)
@@ -42,6 +45,7 @@ Uerr = abs(U - Unum);
 Derr = abs(D - Dnum);
 
 figure;
+colororder('sail')
 hold on
 plot(Uerr,z)
 plot(Derr,z)

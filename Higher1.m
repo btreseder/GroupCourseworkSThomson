@@ -70,6 +70,7 @@ t = 1:dt:tn+1;
 
 % Plot for C02 = 360ppmv
 i = 1:50:length(t);
+colororder('sail')
     plot(T1(i,1:20000),z(1:20000), ...
          T1(length(t),1:1000:20000),z(1:1000:20000), '--')
     xlabel('Temperature (K)')
@@ -77,6 +78,7 @@ i = 1:50:length(t);
 
 % Plot for C02 = 720ppmv
 figure;
+colororder('sail')
 y = 1:50:length(t);
     plot(T2(y,1:20000),z(1:20000), ...
          T2(length(t),1:1000:20000),z(1:1000:20000), '--')
@@ -85,6 +87,7 @@ y = 1:50:length(t);
     
 % Both 360ppmv and 720ppmv plotted as both graphs converge to a single line
 figure; hold on
+colororder('sail')
 plot(T1(length(t),1:20000),z(1:20000))
 plot(T2(length(t),1:20000),z(1:20000))
 legend 'C02=360ppmv' 'C02=720ppmv'
