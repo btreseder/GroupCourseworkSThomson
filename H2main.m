@@ -1,9 +1,7 @@
 clear;
 close all;
 
-%Q6main %use either this or the workspace
-load("10week_q6.mat")
-
+Q6main %requires results from Q6
 T_new = T(length(t),1:length(z)-1, 1:length(theta));
 
 %%
