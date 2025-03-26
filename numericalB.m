@@ -1,3 +1,4 @@
+
 function B = numericalB(B_0,t)
     B = zeros(1,length(t));
     B(1) = B_0;

@@ -1,55 +1,42 @@
- clear; close all;
+clear; close all; clc;
 
 load("workspace_consts.mat")
 
-tn = 604800*10; % 10 week in seconds
-dt = 9600;
+tn = 6000000; % 10 weeks in seconds
+dt = 10000;   % Delta t in seconds
 
-U_0 = S_0;  D_0 = 0;
-Cp = 7*R/2; %Specific Heat Capacity
+T = zeros(tn/dt,length(z)); % Zeros Array for Temperature
+p = zeros(length(z));       % Zeros Array for Pressure
 
+% Initial Conditions
+U_0 = S_0;  D_0 = 0; % Upward and Downward Flux ICs
+Cp = 7*R/2;          % Specific Heat Capacity
+T(1,:) = 175;        % Initial Temperature
 
+B = B(tau,S_0); % Plank Function Analytical solution
 
-T = zeros(tn/dt,length(z));
-T(1,:) = 175;
-B1 = B(tau,S_0);
-
-p = zeros(length(z));
-%p(1,:) = p_z0;
-
-
-%figure; hold on;
-for n= 1:(tn/dt)
-    p(n,:) = q4_findp( p_z0 , g , R , T(n,:) );
+for n = 1:(tn/dt)                          % Horizontal Position in Array
+    j = length(T(n,:)) -1;                 % Vertical Position in T array
+    p(n,:) = q4_findp(p_z0, g, R, T(n,:)); % Pressure Array position
     
-    B1 = sigma.*T(n,:).^4;
-
-    Unum = find_U(B1,tau,U_0);
-    Dnum = find_D(B1,tau,D_0);
-
-    dNdp = finddNdp( Unum, Dnum, p(n,:) );
+    B = sigma .*T(n,:).^4;    % Plank Function Numerical solution
+    Unum = find_U1(B,tau,U_0); % Upward Flux Numerical solution
+    Dnum = find_D(B,tau,D_0); % Downward Flux Numerical solution
     
-    j = length(T(n,:))-1;
+    % Net Flux differential
+    dNdp = finddNdp(Unum, Dnum, p(n,:));
 
-    T(n+1,1:j) = T(n,1:j) + dt *(g/Cp)* dNdp;
-    
-
-        %plot(Dnum,z)
-
+    T(n +1,1:j) = T(n,1:j) + dt *(g/Cp) *dNdp; % Forward Euler
 end
 
+% Delta t for plotting
+t = 1:dt:tn +1;
 
-t = 1:dt:tn+1;
-
-
-
-%%
+% Plotting
 figure;
 hold on
-for i = 1:63:length(t)
-    plot(T(i,1:20000),z(1:20000))
-end
-xlabel('Temperature (K)')
-ylabel('Height (z)')
-legend('Intial Condition','1 week','2 weeks', '3 weeks', '4 weeks','5 weeks','6 weeks','7 weeks','8 weeks', '9 weeks', '10 weeks')
-%%
+i = 1:50:length(t);
+plot(T(i,1:20000), z(1:20000))
+title('CO2 360ppmv')
+xlabel('Temperature (K°)')
+ylabel('Height (m)')
