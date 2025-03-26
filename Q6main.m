@@ -48,11 +48,19 @@ for i = 1:length(theta)
     end
 end
 
+<<<<<<< Updated upstream
 
 t = 1:dt:tn+1;
 
 
 close all;  figure;
+=======
+% Delta t for plotting
+t = 1:dt:tn+1;
+
+% Plotting with a contour
+figure;
+>>>>>>> Stashed changes
 hold on
 
 theta_deg = theta.* (180/pi);
