@@ -35,7 +35,7 @@ p_new = zeros(length(z)-1);
 kappa = 1e6;
 for n= 1:(tn/dt)
     for i = 1:length(theta)
-        p_new(n,:) = q4_findp( p_z0 , g , R , T_new(n,:,i) );
+        p_new(n,:) = find_p( p_z0 , g , R , T_new(n,:,i) );
         
         B1 = sigma.*T_new(n,:,i).^4;
         
