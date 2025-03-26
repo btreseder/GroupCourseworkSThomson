@@ -48,10 +48,10 @@ for i = 1:length(theta)
     end
 end
 
-%%
+
 t = 1:dt:tn+1;
 
-%%
+
 close all;  figure;
 hold on
 
